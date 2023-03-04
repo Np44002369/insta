@@ -1,0 +1,22 @@
+import itertools
+import string
+
+def brute_force_password(password):
+    characters = string.ascii_letters + string.digits
+    attempts = 0
+    for length in range(1, len(password)+1):
+        for guess in itertools.product(characters, repeat=length):
+            attempts += 1
+            guess = ''.join(guess)
+            if guess == password:
+                return (True, guess, attempts)
+    return (False, None, attempts)
+
+# Example usage
+result, password, attempts = brute_force_password('password123')
+if result:
+    print('Password found:', password)
+else:
+    print('Password not found')
+print('Attempts:', attempts)
+
